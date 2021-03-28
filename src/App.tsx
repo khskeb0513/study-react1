@@ -1,33 +1,31 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {Button} from "react-bootstrap";
 
-class App extends Component<any, any> {
+const App = () => {
 
-    componentDidMount() {
-        document.title = 'index page'
+    const [count, setCount] = useState(0)
+    useEffect(() => {
+        document.title = `pushed ${count} times`
+    })
+    const addCount = () => {
+        setCount(count + 1)
     }
 
-    render() {
-        return (
-            <div className="App">
-                <header className="App-header">
-                    <img src={logo} className="App-logo" alt="logo"/>
-                    <p>
-                        Edit <code>src/App.tsx</code> and save to reload.
-                    </p>
-                    <a
-                        className="App-link"
-                        href="https://reactjs.org"
-                        target="_blank"
-                        rel="noopener noreferrer"
-                    >
-                        Learn React
-                    </a>
-                </header>
-            </div>
-        )
-    }
+    return (
+        <div className="App">
+            <header className="App-header">
+                <img src={logo} className="App-logo" alt="logo"/>
+                <p>
+                    Edit <code>src/App.tsx</code> and save to reload.
+                </p>
+                <Button variant={'warning'} onClick={addCount}>
+                    hi
+                </Button>
+            </header>
+        </div>
+    )
 }
 
 export default App;
