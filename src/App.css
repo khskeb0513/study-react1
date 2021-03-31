@@ -1,0 +1,17 @@
+
+.myDiv {
+    background-color: #F0EDCC;
+}
+
+.navbar-custom {
+    background-color: #02343F;
+    color: #F0EDCC;
+}
+
+.navbar-link {
+    color: white;
+}
+
+.navbar-link:hover {
+    color: #F0EDCC;
+}
