@@ -1,6 +1,6 @@
 import React from "react";
 import {Card, Col, Row} from "react-bootstrap";
-import Blank from '../blank/blank'
+import Blank from '../Blank/Blank'
 
 interface commentFormProps {
     author: string,
@@ -8,7 +8,7 @@ interface commentFormProps {
     body: string
 }
 
-const commentForm = (props: commentFormProps) => {
+const CommentForm = (props: commentFormProps) => {
     return (
         <>
             <Row>
@@ -23,9 +23,9 @@ const commentForm = (props: commentFormProps) => {
                     </Card>
                 </Col>
             </Row>
-            <Blank></Blank>
+            <Blank/>
         </>
     )
 }
 
-export default commentForm
+export default CommentForm

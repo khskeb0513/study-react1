@@ -1,6 +1,6 @@
 import React from "react";
 
-const seatTime = () => {
+const SeatTime = () => {
     return (
         <div>
             <span>
@@ -11,4 +11,4 @@ const seatTime = () => {
     )
 }
 
-export default seatTime
+export default SeatTime

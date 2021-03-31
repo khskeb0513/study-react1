@@ -1,19 +1,20 @@
 import React, {useEffect, useReducer} from 'react';
 import './App.css';
 import 'bootstrap/dist/css/bootstrap.min.css'
-import {Button, Col, Container, FormControl, Nav, Navbar, Row} from "react-bootstrap";
-import SeatPicModal from './components/seatPicModal/seatPicModal'
-import Blank from './components/blank/blank'
-import SeatTime from './components/seatTime/seatTime'
-import Comment from './components/comment/comment'
-import LoginModal from './components/loginModal/loginModal'
-import RegisterModal from './components/registerModal/registerModal'
-import pknuLogo from './pknu.svg'
+import {Button, Col, Container, FormControl, Row} from "react-bootstrap";
+import SeatPicModal from './Components/SeatPicModal/SeatPicModal'
+import Blank from './Components/Blank/Blank'
+import SeatTime from './Components/SeatTime/SeatTime'
+import Comment from './Components/Comment/Comment'
+import LoginModal from './Components/LoginModal/LoginModal'
+import RegisterModal from './Components/RegisterModal/RegisterModal'
+import NavigationBar from "./Components/NavigationBar/NavigationBar";
 
 const initialState = {
     seatPicModal: false,
     loginModal: false,
-    registerModal: false
+    registerModal: false,
+    loginBtn: true
 }
 
 const reducer = (state: any, action: any) => {
@@ -27,6 +28,9 @@ const reducer = (state: any, action: any) => {
         case 'registerModal': {
             return {...state, registerModal: !state.registerModal}
         }
+        case 'loginBtn': {
+            return {...state, loginBtn: !state.loginBtn}
+        }
     }
 
 }
@@ -38,17 +42,9 @@ const App = () => {
     })
     return (
         <div className="App">
-            <Navbar variant={"dark"} className={'navbar-custom'} expand="lg">
-                <Navbar.Brand href="#home">
-                    <img className={'navbar-logo'} width={36} height={36} src={pknuLogo} alt={'부경대 로고'}/>{' '}
-                    LIBISOR.COM
-                </Navbar.Brand>
-                <Navbar.Toggle aria-controls="basic-navbar-nav"/>
-                <Navbar.Collapse className="basic-navbar-nav, justify-content-end">
-                    <Nav.Link className={'navbar-link'} href={"#home"}>열람실 좌석확인</Nav.Link>
-                    <Nav.Link className={'navbar-link'} onClick={() => dispatch({type: 'loginModal'})}>로그인 / 회원가입</Nav.Link>
-                </Navbar.Collapse>
-            </Navbar>
+            <NavigationBar
+                parentDispatch={(e: any) => dispatch(e)}
+                state={state}/>
             <Container>
                 <Blank/>
                 <Blank/>
@@ -84,6 +80,7 @@ const App = () => {
             <LoginModal
                 show={state.loginModal}
                 onHide={() => dispatch({type: 'loginModal'})}
+                parentDispatch={(e: any) => dispatch(e)}
                 goRegister={() => {
                     dispatch({type: 'loginModal'})
                     dispatch({type: 'registerModal'})

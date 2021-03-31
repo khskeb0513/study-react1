@@ -6,7 +6,7 @@ interface registerModalProps {
     onHide: any;
 }
 
-const registerModal = (props: registerModalProps) => {
+const RegisterModal = (props: registerModalProps) => {
     return (
         <Modal {...props}>
             <Modal.Header closeButton>
@@ -27,9 +27,6 @@ const registerModal = (props: registerModalProps) => {
                             <Form.Group controlId="rePassword">
                                 <Form.Control type="password" placeholder="비밀번호 재입력" />
                             </Form.Group>
-                            <Form.Group controlId="autoLoginCheckBox">
-                                <Form.Check type="checkbox" label=" 자동 로그인" />
-                            </Form.Group>
                         </Form>
                     </Col>
                 </Row>
@@ -43,4 +40,4 @@ const registerModal = (props: registerModalProps) => {
     )
 }
 
-export default registerModal
+export default RegisterModal

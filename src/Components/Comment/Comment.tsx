@@ -1,6 +1,6 @@
 import React from 'react'
 import {Col, Row} from "react-bootstrap";
-import CommentForm from "../commentForm/commentForm";
+import CommentForm from "../CommentForm/CommentForm";
 
 const dummyCommentData = [
     {
@@ -14,7 +14,7 @@ const dummyCommentData = [
     }
 ]
 
-const comment = () => {
+const Comment = () => {
     return (
         <>
             <Row>
@@ -32,4 +32,4 @@ const comment = () => {
     )
 }
 
-export default comment
+export default Comment

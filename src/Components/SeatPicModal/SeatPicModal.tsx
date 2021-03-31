@@ -1,14 +1,14 @@
 import {Button, Col, Image, Modal, Row} from "react-bootstrap";
 import React from "react";
 import miraeB1 from "./miraeB1.png";
-import './seatPicModal.css'
+import './SeatPicModal.css'
 
 interface myModalProps {
     show: Boolean;
     onHide: any;
 }
 
-const seatPicModal = (props: myModalProps) => {
+const SeatPicModal = (props: myModalProps) => {
     return (
         <Modal {...props} size={"lg"}>
             <Modal.Header closeButton>
@@ -30,4 +30,4 @@ const seatPicModal = (props: myModalProps) => {
     )
 }
 
-export default seatPicModal
+export default SeatPicModal

@@ -1,10 +1,11 @@
-import React, {useReducer, useState} from "react";
+import React, {useReducer} from "react";
 import {Alert, Button, Col, Form, Modal, Row} from "react-bootstrap";
 
 interface loginModalProps {
     show: Boolean;
     onHide: any;
     goRegister: any;
+    parentDispatch: any;
 }
 
 interface userForm {
@@ -20,14 +21,14 @@ const initialState = {
 
 const reducer = (state: any, action: any) => {
     switch (action.type) {
-        case 'email':{
-            return {...state, [action.e.target.name]: action.e.target.value}
+        case 'email': {
+            return {...state, email: action.e.target.value}
         }
-        case 'password':{
-            return {...state, [action.e.target.name]: action.e.target.value}
+        case 'password': {
+            return {...state, password: action.e.target.value}
         }
-        case 'alert':{
-            return {...state, alert: !state.false}
+        case 'alert': {
+            return {...state, alert: action.alert}
         }
     }
 }
@@ -41,9 +42,11 @@ const LoginModal = (props: loginModalProps) => {
     const [state, dispatch] = useReducer(reducer, initialState)
     const checkUser = (user: userForm) => {
         if (user.email === mockUser.email && user.password === mockUser.password) {
-            dispatch({type: alert})
+            dispatch({type: 'alert', alert: false})
+            props.onHide()
+            props.parentDispatch({type: 'loginBtn'})
         } else {
-            dispatch({type: alert})
+            dispatch({type: 'alert', alert: true})
         }
     }
     return (
@@ -57,11 +60,13 @@ const LoginModal = (props: loginModalProps) => {
                         <Form>
                             <Form.Group controlId="email">
                                 <Form.Label>학사 이메일</Form.Label>
-                                <Form.Control onChange={e => dispatch({type: 'email', e})} type="email" placeholder="xxx@pukyong.ac.kr"/>
+                                <Form.Control onChange={e => dispatch({type: 'email', e})} type="email"
+                                              placeholder="xxx@pukyong.ac.kr"/>
                             </Form.Group>
                             <Form.Group controlId="password">
                                 <Form.Label>비밀번호</Form.Label>
-                                <Form.Control onChange={e => dispatch({type: 'password', e})} type="password" placeholder="비밀번호"/>
+                                <Form.Control onChange={e => dispatch({type: 'password', e})} type="password"
+                                              placeholder="비밀번호"/>
                             </Form.Group>
                             {/*<Form.Group controlId="autoLoginCheckBox">*/}
                             {/*    <Form.Check type="checkbox" label=" 자동 로그인" />*/}

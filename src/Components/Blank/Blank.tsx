@@ -1,10 +1,10 @@
 import {Row} from "react-bootstrap";
 import React from "react";
 
-const blank = () => {
+const Blank = () => {
     return (
         <Row><p/></Row>
     )
 }
 
-export default blank
+export default Blank
