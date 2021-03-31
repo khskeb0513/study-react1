@@ -5,33 +5,31 @@ import {Button, Col, Container, FormControl, Nav, Navbar, Row} from "react-boots
 import SeatPicModal from './components/seatPicModal/seatPicModal'
 import Blank from './components/blank/blank'
 import SeatTime from './components/seatTime/seatTime'
-import CommentForm from './components/commentForm/commentForm'
+import Comment from './components/comment/comment'
+import LoginModal from './components/loginModal/loginModal'
+import RegisterModal from './components/registerModal/registerModal'
 import pknuLogo from './pknu.svg'
 
 const initialState = {
-    modalShow: false
+    seatPicModal: false,
+    loginModal: false,
+    registerModal: false
 }
 
 const reducer = (state: any, action: any) => {
     switch (action.type) {
-        case 'modalShow': {
-            return {...state, modalShow: !state.modalShow}
+        case 'seatPicModal': {
+            return {...state, seatPicModal: !state.seatPicModal}
+        }
+        case 'loginModal': {
+            return {...state, loginModal: !state.loginModal}
+        }
+        case 'registerModal': {
+            return {...state, registerModal: !state.registerModal}
         }
     }
 
 }
-
-const dummyCommentData = [
-    {
-        author: '새누리',
-        time: '2000/00/01 00:00:00',
-        body: '잰 언제까지 자리차지 하는거지?'
-    }, {
-        author: '더민주',
-        time: '2000/00/01 00:00:00',
-        body: '꼽냐?'
-    }
-]
 
 const App = () => {
     const [state, dispatch] = useReducer(reducer, initialState)
@@ -48,7 +46,7 @@ const App = () => {
                 <Navbar.Toggle aria-controls="basic-navbar-nav"/>
                 <Navbar.Collapse className="basic-navbar-nav, justify-content-end">
                     <Nav.Link className={'navbar-link'} href={"#home"}>열람실 좌석확인</Nav.Link>
-                    <Nav.Link className={'navbar-link'} href={'#login'}>로그인 / 회원가입</Nav.Link>
+                    <Nav.Link className={'navbar-link'} onClick={() => dispatch({type: 'loginModal'})}>로그인 / 회원가입</Nav.Link>
                 </Navbar.Collapse>
             </Navbar>
             <Container>
@@ -60,7 +58,7 @@ const App = () => {
                     </Col>
                     <Col>
                         <Button variant={"primary"}>검색</Button>{' '}
-                        <Button variant={"dark"} onClick={() => dispatch({type: 'modalShow'})}>좌석배치도</Button>
+                        <Button variant={"dark"} onClick={() => dispatch({type: 'seatPicModal'})}>좌석배치도</Button>
                     </Col>
                 </Row>
                 <Blank/>
@@ -80,19 +78,17 @@ const App = () => {
                 </Row>
                 <Blank/>
                 <Blank/>
-                <Row>
-                    <Col>
-                        <h4>
-                            코멘트: {'test건'}
-                        </h4>
-                        <hr/>
-                    </Col>
-                </Row>
-                {dummyCommentData.map(v => {
-                    return (<CommentForm author={v.author} time={v.time} body={v.body}/>)
-                })}
+                <Comment/>
             </Container>
-            <SeatPicModal show={state.modalShow} onHide={() => dispatch({type: 'modalShow'})}/>
+            <SeatPicModal show={state.seatPicModal} onHide={() => dispatch({type: 'seatPicModal'})}/>
+            <LoginModal
+                show={state.loginModal}
+                onHide={() => dispatch({type: 'loginModal'})}
+                goRegister={() => {
+                    dispatch({type: 'loginModal'})
+                    dispatch({type: 'registerModal'})
+                }}/>
+            <RegisterModal show={state.registerModal} onHide={() => dispatch({type: 'registerModal'})}/>
         </div>
     )
 }

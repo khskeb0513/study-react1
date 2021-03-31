@@ -1,15 +1,16 @@
 import {Button, Col, Image, Modal, Row} from "react-bootstrap";
 import React from "react";
 import miraeB1 from "./miraeB1.png";
+import './seatPicModal.css'
 
-interface MyModalProps {
+interface myModalProps {
     show: Boolean;
     onHide: any;
 }
 
-const SeatPicModal = (props: MyModalProps) => {
+const seatPicModal = (props: myModalProps) => {
     return (
-        <Modal {...props}>
+        <Modal {...props} size={"lg"}>
             <Modal.Header closeButton>
                 <Modal.Title>열람실 좌석배치도</Modal.Title>
             </Modal.Header>
@@ -22,11 +23,11 @@ const SeatPicModal = (props: MyModalProps) => {
             </Modal.Body>
             <Modal.Footer>
                 <Button variant="dark" onClick={props.onHide}>
-                    Close
+                    닫기
                 </Button>
             </Modal.Footer>
         </Modal>
     )
 }
 
-export default SeatPicModal
+export default seatPicModal
